@@ -118,7 +118,7 @@ class TabularFile:
         with open(self.filepath, 'br') as file:
             content = file.readlines()
         # Analyze data by line (record)
-        for line in content:
+        for line in content[9:]:
             # Ignore blank lines
             if line != b'\r\n':
                 # Ignore colnames line
@@ -168,7 +168,7 @@ def loadData(variable:Literal['pmax24', 'p', 'evo', 'tmax_x', 'tmax_mean', 'tmin
     """Load data from a shelve format file by variable of interest.
 
     Args:
-        variable ('pmax', 'p', 'evo', 'tmax_x', tmax_mean', &#39;tmin_x&#39;, &#39;tmin_mean&#39;, &#39;t&#39;]): meteorological variable of interest.
+        variable ('pmax', 'p', 'evo', 'tmax_x', tmax_mean', 'tmin_x', 'tmin_mean', 't'): meteorological variable of interest.
 
     Returns:
         pd.DataFrame: two-dimensional, size-mutable, potentially heterogeneous tabular data.
@@ -182,3 +182,13 @@ def loadData(variable:Literal['pmax24', 'p', 'evo', 'tmax_x', 'tmax_mean', 'tmin
         db.close()
         df = pd.DataFrame(data, columns=__colnames__)
         return df
+
+
+
+
+if __name__=='__main__':
+    # from kmlparser import seekData
+    # seekData(r'StatsUnzipped\doc copy.kml', 'stats.gpkg', period='MENSUALES')
+    # print('RAW DATA CREATED')
+    # createDB('RawData', encoding='utf-8')
+    print(loadData('t').shape[0])
