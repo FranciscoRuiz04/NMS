@@ -191,4 +191,4 @@ if __name__=='__main__':
     # seekData(r'StatsUnzipped\doc copy.kml', 'stats.gpkg', period='MENSUALES')
     # print('RAW DATA CREATED')
     # createDB('RawData', encoding='utf-8')
-    print(loadData('t').shape[0])
+    loadData('t').to_csv('temp_concentrado.csv')
